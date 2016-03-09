@@ -1,0 +1,173 @@
+<script type="text/html" id="template-workout-view">
+    <div class="js-page workout-info">
+        <h1 class="pageTitle">New Workout</h1>
+
+        <div id="workout-data" class="js-workout-data box">
+            <div class="row">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab-item-1" aria-controls="tab-item-1" role="tab" data-toggle="tab">Health and Fitness</a></li>
+                        <li role="presentation"><a href="#tab-item-2" aria-controls="tab-item-2" role="tab" data-toggle="tab">Performance</a></li>
+                        <li role="presentation"><a href="#tab-item-3" aria-controls="tab-item-3" role="tab" data-toggle="tab">Aerobic</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <!-- HEALTH AND FITNESS 1 sample -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab-item-1">
+                            <form id="hf-data" class="js-hf-data">
+                                <h2 class="boxHeadline">Pre-Workout Data</h2>
+                                <div class="js-errors errors"></div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cortisol">Cortisol</label>
+                                            <input type="text" class="form-control" name="cortisol" placeholder="cortisol"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="IgA">IgA</label>
+                                            <input type="text" class="form-control" name="IgA" placeholder="IgA"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="js-submit btn btn-primary">Submit</button>
+                            </form>
+
+                            <div class="js-hf-graphs graphs-container">
+                                <div class="js-fitness-capacity-score graph gauge">
+                                    <h2>Fitness Capacity Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                                <div class="js-stress-score graph gauge ct-chart ct-square">
+                                    <h2>Stress Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                                <div class="js-fitness-score graph gauge ct-chart ct-square">
+                                    <h2>Fitness Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PERFORMANCE 3 samples -->
+                        <div role="tabpanel" class="tab-pane fade" id="tab-item-2">
+                            <form id="performance-pre-data" class="js-performance-pre-data">
+                                <div class="js-errors errors"></div>
+
+                                <div class="row">
+                                    <h2 class="boxHeadline">Pre-Workout Data</h2>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cortisol">Cortisol</label>
+                                            <input type="text" class="form-control" name="cortisol-pre" placeholder="cortisol"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="IgA">IgA</label>
+                                            <input type="text" class="form-control" name="IgA-pre" placeholder="IgA"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="amylase">Amylase</label>
+                                            <input type="text" class="form-control" name="amylase-pre" placeholder="amylase"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="js-submit btn btn-primary">Submit</button>
+                            </form>
+
+                            <div class="js-performance-pre-graphs graphs-container">
+                                <div class="graph js-fitness-capacity-score">
+                                    <h2>Fitness Capacity Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                                <div class="graph ct-chart ct-square js-stress-score">
+                                    <h2>Stress Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                                <div class="graph ct-chart ct-square js-fitness-score">
+                                    <h2>Fitness Score</h2>
+                                    <div class="chart ct-chart ct-square js-chart"></div>
+                                </div>
+                            </div>
+
+                            <form id="performance-post-data" class="js-performance-post-data">
+
+                                <div class="row">
+                                    <h2 class="boxHeadline">End of Workout</h2>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cortisol">Cortisol</label>
+                                            <input type="text" class="form-control" name="cortisol-end" placeholder="cortisol"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="IgA">IgA</label>
+                                            <input type="text" class="form-control" name="IgA-end" placeholder="IgA"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="amylase">Amylase</label>
+                                            <input type="text" class="form-control" name="amylase-end" placeholder="amylase"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <h2 class="boxHeadline">Post Workout</h2>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cortisol">Cortisol</label>
+                                            <input type="text" class="form-control" name="cortisol-post" placeholder="cortisol"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="IgA">IgA</label>
+                                            <input type="text" class="form-control" name="IgA-post" placeholder="IgA"  />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="amylase">Amylase</label>
+                                            <input type="text" class="form-control" name="amylase-post" placeholder="amylase"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="js-submit btn btn-primary">Submit</button>
+                            </form>
+
+                            <!-- GETS REPLACED WITH TEMPLATE -->
+                            <div class="js-performance-post-graphs graphs-container"></div>
+                        </div>
+
+                        <!-- AEROBIC THRESHOLD MANY SAMPLES -->
+                        <div role="tabpanel" class="tab-pane fade" id="tab-item-3">
+                            <form id="aerobic-data" class="js-aerobic-data">
+
+                                <div class="js-errors errors"></div>
+                                <p><a href="#" class="js-add-timepoint add btn btn-primary">+ add timepoint</a></p>
+                                <div class="js-sample-rows"></div>
+
+                                <button type="submit" class="js-submit btn btn-primary">Submit</button>
+                            </form>
+
+                            <!-- THIS GETS REPLACED BY A TEMPLATE -->
+                            <div class="js-aerobic-graphs graphs-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

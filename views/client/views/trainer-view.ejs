@@ -1,0 +1,117 @@
+<script type="text/html" id="template-trainer-view">
+    <div class="js-page trainer-info view">
+        <header class="box rte">
+            <div class="avatar">
+                <img src="/build/images/blank-avatar.png" />
+            </div>
+
+            <div class="profile-info">
+                <div class="tabs">
+                    <ul>
+                        <li><a href="#general">General</a></li>
+                        <li><a href="#manage">Manage</a></li>
+                    </ul>
+
+                    <div id="general">
+                        <h2>Joe Trainer</h2>
+                        <p><b>Email:</b> joe@trainer.com</p>
+                        <p><b>Phone:</b> (408) 567-9876</p>
+                        <p><b>Facilities:</b> <a href="/facility/99">Evolution</a>, <a href="/facility/99">Planet Fitness</a></p>
+                    </div>
+
+                    <div id="manage">
+                        <h2>Facility Info</h2>
+                        <form id="trainer-info">
+                            <table>
+                                <colgroup>
+                                    <col width="30%" />
+                                    <col width="65%" />
+                                </colgroup>
+                                <thead>
+                                    <td></td>
+                                    <td></td>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><label for="first_name">First Name:</td>
+                                        <td><input type="text" name="first_name" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="email_address">Email:</label></td>
+                                        <td><input type="text" name="email_address" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="phone">Phone:</td>
+                                        <td><input type="text" name="phone" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="address_line_1">Address line 1:</label></td>
+                                        <td><input type="text" name="address_line_1" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="address_line_2">Address line 2:</label></td>
+                                        <td><input type="text" name="address_line_1" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="facility">Facility:</label></td>
+                                        <td><input type="text" name="facility" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="clients-list" class="item-list js-clients-list box rte">
+            <h2>Client List</h2>
+            <table>
+                <colgroup>
+                    <col width="10%" />
+                    <col width="30%" />
+                    <col width="30%" />
+                    <col width="30%" />
+
+                </colgroup>
+                <thead>
+                    <td>ID</td>
+                    <td>Client Name</td>
+                    <td>Last Workout</td>
+                    <td>BioPrint Fitness Score</td>
+                </thead>
+                <tbody>
+                    <tr data-href="99">
+                        <td>12312</td>
+                        <td>Jen Client</td>
+                        <td>11/24/2014</td>
+                        <td>66</td>
+                    </tr>
+                    <tr data-href="99">
+                        <td>12313</td>
+                        <td>Jen Client</td>
+                        <td>11/24/2014</td>
+                        <td>66</td>
+                    </tr>
+                    <tr data-href="99">
+                        <td>12314</td>
+                        <td>Jen Client</td>
+                        <td>11/24/2014</td>
+                        <td>66</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="charts box rte">
+            <h2>Chart 1</h2>
+        </div>
+
+        <div class="charts box rte">
+            <h2>Chart 2</h2>
+        </div>
+    </div>
+</script>

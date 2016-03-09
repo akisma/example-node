@@ -1,0 +1,24 @@
+/* settings.scss */
+.user-settings .profile-info p, .user-settings .profile-info label {
+  margin: .3em 0;
+  font-family: arial;
+  font-size: 85%;
+}
+.user-settings .profile-info label {
+  font-weight: bold;
+}
+.user-settings .profile-info td {
+  width: 8em;
+}
+.user-settings .profile-info tr {
+  padding: .5em 0;
+}
+.user-settings .profile-info .table-wrapper {
+  position: relative;
+  width: 70%;
+  padding-bottom: 1.5em;
+}
+.user-settings .profile-info .table-wrapper .submit {
+  position: absolute;
+  right: 26%;
+}

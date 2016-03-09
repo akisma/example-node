@@ -1,0 +1,78 @@
+/* PROFILE/DASHBOARD LAYOUT */
+
+.facility-info,
+.trainer-info,
+.user-settings {
+
+
+  header {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    border: none;
+
+    .avatar, .chart {
+      background-color: #cccccc;
+
+      img, h2 {
+        margin: 5em;
+      }
+    }
+
+    .profile-info {
+      flex-basis: 65%;
+      flex-grow: 3;
+      margin-left: 2em;
+    }
+  }
+
+}
+
+.item-list {
+  .item-list {
+    margin:0px;padding:0px;
+    width:100%;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #000000;
+
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+  }
+}
+
+/* graphs */
+
+.graphs-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+
+  &:after {
+    margin-top: -5em;
+  }
+
+  .graph {
+    flex-basis: 32%;
+
+    &.gauge .chart {
+      margin-bottom: -50%;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  }
+}

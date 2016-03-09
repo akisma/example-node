@@ -1,0 +1,23 @@
+<script type="text/html" id="template-aerobic-timepoint">
+	<div class="js-row row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+                <label for="cortisol[{{= n }}]">Cortisol</label>
+                <input type="text" class="js-cortisol form-control" name="cortisol[{{= n }}]" placeholder="cortisol"  />
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+                <label for="IgA[{{= n }}]">IgA</label>
+                <input type="text" class="js-IgA form-control" name="IgA[{{= n }}]" placeholder="IgA"  />
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+                <label for="amylase[{{= n }}]">Amylase</label>
+                <input type="text" class="js-amylase form-control" name="amylase[{{= n }}]" placeholder="amylase"  />
+            </div>
+        </div>
+        <input type="hidden" class="js-timestamp" name="timestamp[{{= n }}]" value="{{= Date.now() }}" />
+    </div>
+</script>

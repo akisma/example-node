@@ -1,0 +1,21 @@
+.entry {
+  .box {
+    width: 33%;
+      margin: 5em auto;
+      display: none;
+  }
+}
+
+.entry-state {
+  aside {
+    display: none;
+  }
+
+  .pageContent.extended {
+    margin: 0 12px 0 0;
+
+    .footer {
+      text-align: center;
+    }
+  }
+}

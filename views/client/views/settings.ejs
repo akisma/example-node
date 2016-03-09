@@ -1,0 +1,137 @@
+<script type="text/html" id="template-settings">
+    <div class="js-page user-settings view">
+        <h1 class="pageTitle">Settings</h1>
+        <header class="box">
+            <div class="avatar">
+                <img src="/build/images/blank-avatar.png" />
+            </div>
+            <div class="profile-info">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#tab-item-1" aria-controls="tab-item-1" role="tab" data-toggle="tab">Account Info</a></li>
+                    <li role="presentation"><a href="#tab-item-2" aria-controls="tab-item-2" role="tab" data-toggle="tab">Edit</a></li>
+                    <li role="presentation"><a href="#tab-item-3" aria-controls="tab-item-3" role="tab" data-toggle="tab">Consent Forms</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="tab-item-1">
+                        <div class="tableWrap table-responsive">
+                            <table class="table table-no-border">
+                                <colgroup>
+                                    <col width="22%" />
+                                    <col width="78%" />
+                                </colgroup>
+                                <tbody>
+                                    <tr><td><b>Login email:</b></td><td> {{= login_email }}</td></tr>
+                                    <tr><td><b>Account Type:</b></td><td> {{= user_type }}</td></tr>
+                                    <tr><td><b>Address:</b></td><td> {{= address_line1 }}<br />{{= address_line2 }} {{= city }} {{= state }}</td></tr>
+                                    <tr><td><b>Address Type:</b></td><td> {{= address_type }}</td></tr>
+                                    <tr><td><b>Phone ({{= phone_type }}):</b></td><td> {{= phone_primary }}</td></tr>
+                                    <tr><td><b>Secondary Email:</b></td><td> {{= email_address }}</td></tr>
+                                    <tr><td><a href="/user/reset">reset password</a></td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab-item-2">
+                        <form id="account-info" class="js-settings">
+                            <div class="js-errors errors"></div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="email">Email - THIS IS YOUR LOGIN</label>
+                                        <input type="text" class="form-control" name="login_email" placeholder="Email" value="{{= login_email }}" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="address_line1">Address Line 1</label>
+                                        <input type="text" class="form-control" name="address_line1" placeholder="Middle name" value="{{= address_line1 }}" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="address_line2">Address Line 2</label>
+                                        <input type="text" class="form-control" name="address_line2" placeholder="Last name" value="{{= address_line2 }}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" name="city" placeholder="City" value="{{= city }}" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control" name="state" placeholder="State" value="{{= state }}" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="phone_primary">Phone</label>
+                                        <input type="text" class="form-control" name="phone_primary" placeholder="Phone" value="{{= phone_primary }}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row customSelectWrap">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="email_address">Secondary Email</label>
+                                        <input type="text" class="form-control" name="email_address" placeholder="Email" value="{{= email_address }}" />
+                                    </div>
+                                </div>
+
+                                <!-- TO BE IMPLEMENTED LATER
+                                <div class="col-xs-12 col-sm-4 i">
+                                    <div class="form-group">
+                                        <label>User Type</label>
+                                        <select class="js-select" name="user_type">
+                                            <option disabled selected>- Select -</option>
+                                            <option>Client</option>
+                                            <option>Trainer</option>
+                                            <option>Facility</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+
+                            <button type="submit" class="btn btn-primary js-submit">Submit</button>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab-item-3">
+                        <h2 class="boxHeadline">Terms of Use:</h2>
+                        <h3 class="boxHeadlineSub">Here would be the terms</h3>
+                        <form id="consent-form">
+                            <div class="radiobuttons">
+                                <label>
+                                    <input type="radio" name="radio" />
+                                    <span>I agree</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="radio" checked />
+                                    <span>I don't agree</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- TO BE IMPLEMENTED LATER
+        <div class="consent box rte">
+            <h2>Payment Info</h2>
+        </div>
+        -->
+    </div>
+</script>

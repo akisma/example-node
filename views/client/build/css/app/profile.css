@@ -1,0 +1,73 @@
+/* PROFILE/DASHBOARD LAYOUT */
+.facility-info header,
+.trainer-info header,
+.user-settings header {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  border: none;
+}
+.facility-info header .avatar, .facility-info header .chart,
+.trainer-info header .avatar,
+.trainer-info header .chart,
+.user-settings header .avatar,
+.user-settings header .chart {
+  background-color: #cccccc;
+}
+.facility-info header .avatar img, .facility-info header .avatar h2, .facility-info header .chart img, .facility-info header .chart h2,
+.trainer-info header .avatar img,
+.trainer-info header .avatar h2,
+.trainer-info header .chart img,
+.trainer-info header .chart h2,
+.user-settings header .avatar img,
+.user-settings header .avatar h2,
+.user-settings header .chart img,
+.user-settings header .chart h2 {
+  margin: 5em;
+}
+.facility-info header .profile-info,
+.trainer-info header .profile-info,
+.user-settings header .profile-info {
+  flex-basis: 65%;
+  flex-grow: 3;
+  margin-left: 2em;
+}
+
+.item-list .item-list {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  box-shadow: 10px 10px 5px #888888;
+  border: 1px solid #000000;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-top-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+/* graphs */
+.graphs-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.graphs-container:after {
+  margin-top: -5em;
+}
+.graphs-container .graph {
+  flex-basis: 32%;
+}
+.graphs-container .graph.gauge .chart {
+  margin-bottom: -50%;
+}
+.graphs-container .graph h2 {
+  text-align: center;
+}

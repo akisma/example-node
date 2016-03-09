@@ -1,0 +1,15 @@
+.entry .box {
+  width: 33%;
+  margin: 5em auto;
+  display: none;
+}
+
+.entry-state aside {
+  display: none;
+}
+.entry-state .pageContent.extended {
+  margin: 0 12px 0 0;
+}
+.entry-state .pageContent.extended .footer {
+  text-align: center;
+}

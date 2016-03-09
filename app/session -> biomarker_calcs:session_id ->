@@ -1,0 +1,12 @@
+session -> biomarker_calcs:session_id ->
+session -> session_exercise_assoc:session_id -> this is key value pair of exercise types since we don't know what they are
+this was designed for one calc per excersise session
+
+client_product_assoc -> what products the client is subscribed to (paying for)
+
+sample_biomarker_result -> actual values stored here
+biomarker -> actually just stores the name and description of biomarker (so like 'cortisol' 'stress hormone')
+
+client health condition - 1:1 relationship, just a blob of notes
+
+client fitness status assoc - ??

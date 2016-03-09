@@ -1,0 +1,818 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+    <!-- HACKITY HACK... DON'T TALK BACK -->
+    <!-- hijack 404 page to always return index.html for routing since amazon sucks. terrible, just awful. -->
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BioPrint Fitness</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link href="/build/css/normalize.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <link href="/build/css/main.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <!--[if IE]>
+            <link href="/build/css/sass/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+        <script src="/build/js/lib/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+
+        <!-- APP LAYOUT BEGIN -->
+        <div class="wrapper">
+            <div class="header container">
+                <h1><a href="/">BioPrint Fitness</a></h1>
+                <h2>Welcome, <%= user.dataValues.login_email %></h2>
+                <ul class="actions">
+                    <li class="button"><a href="/entry">log in</a></li>
+                    <li class="button"><a href="/client/me">my page</a></li>
+                    <li class="button"><a href="/user/settings">settings</a></li>
+                    <li class="button"><a href="/logout">log out</a></li>
+                </ul>
+            </div>
+
+            <!-- module views attach here -->
+            <div class="content container js-main">
+            </div>
+        </div>
+
+        <div class="footer container">
+            <p>BioPrint Fitness is not diagnosing any health ailments or providing any medical, health, or treatment benefits.</p>
+            <p>&copy; 2015 BIOPRINT FITNESS | ALL RIGHTS RESERVED | PATENT PENDING</p>
+        </div>
+
+        <!-- APP LAYOUT END -->
+
+        <script type="text/javascript" data-main="/src/js/main.js" src="/src/js/vendor/require-2.1.20.js"></script>
+
+        <!-- templates -->
+        <script type="text/html" id="template-global-modal">
+            <div class="modal js-global-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>{{ header }}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{ body }}</p>
+                </div>
+                <div class="modal-footer">
+                    <form>
+                        <button data-dismiss="modal" class="js-close btn">{{ dismiss }}</button>
+                    </form>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-index">
+            <ul class="js-index-links index-links">
+                <li><a href="/test">test page</a></li>
+                <li><a href="/entry">signup/login</a></li>
+                <li><a href="/dashboard">dashboard</a></li>
+                <li><a href="/form-1">form 1</a></li>
+                <li><a href="/form-2">form 2</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+
+            <div class="js-results">
+
+            </div>
+        </script>
+
+        <script type="text/html" id="template-test">
+            <ul class="js-test-links test-links">
+                <li class="js-test-signup">test signup (sends dummy POST info for signup)</li>
+                <li class="js-test-login">test login (sends dummy POST info, to be replaced by a Real Form&trade;</li>
+                <li class="js-test-logout">test logout (no post data, should simply log user out on click)</li>
+                <li class="js-test-form1-submit">test submission for "form 1" (sends BS POST data; critera and fields TBD) to be replaced by a Real Form&trade;</li>
+                <li class="js-test-form2-submit">test submission for "form 2" (sends BS POST data; critera and fields TBD) to be replaced by a Real Form&trade;</li>
+                <li class="js-test-form1-get">test GET for "form1" (sends GET to /api/form1/, will display data below if success)</li>
+                <li class="js-test-form2-get">test GET for "form2" (sends GET to /api/form2/, will display data below if success)</li>
+            </ul>
+
+            <div class="js-results">
+
+            </div>
+        </script>
+
+        <script type="text/html" id="template-entry">
+            <div class="container entry">
+                <form name="login" id="login" class="js-login login">
+                    <h2>Login</h2>
+                    <ul>
+                        <li><label for="username">Email:</label> <input type="text" name="username" /></li>
+                        <li><label for="password">Password:</label> <input type="password" name="password" /></li>
+                        <li><a class="button js-login-submit">Log In</a></li>
+                    </ul>
+                    <p>New users, <a class="js-to-signup" href="#signup">sign up here</a>.</p>
+                </form>
+
+                <form name="signup" id="signup" class="js-signup signup">
+                    <h2>Sign Up</h2>
+                    <ul>
+                        <li><label for="username">Email:</label> <input type="text" name="username" /></li>
+                        <li><label for="password">Password:</label> <input type="password" name="password" /></li>
+                        <li><label for="password2">Password (match):</label> <input type="password" name="password2" /></li>
+                        <li><a class="button js-signup-submit">Sign Up</a></li>
+                    </ul>
+                    <p>Already registered? <a class="js-to-login" href="#signup">log in here</a>.</p>
+                </form>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-client-view">
+            <div class="js-page client-info view">
+                <header>
+                    <div class="avatar">
+                        <img src="/build/images/blank-avatar.png" />
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="tabs">
+                            <ul>
+                                <li><a href="#general">general</a></li>
+                                <li><a href="#intake">intake</a></li>
+                                <li><a href="#current">current</a></li>
+                            </ul>
+
+                            <div id="general">
+                                <h2>Jen Client</h2>
+                                <p><b>Trainer:</b> <a href="/trainer/99">Joe Trainer</a></p>
+                                <p><b>Facility:</b> <a href="/facility/99">Evolution Fitness Center, Palo Alto, CA</a></p>
+                            </div>
+
+                            <div id="intake">
+                                <h2>Intake Info</h2>
+                                <form id="client-intake-info">
+                                    <table>
+                                        <colgroup>
+                                            <col width="30%" />
+                                            <col width="65%" />
+                                        </colgroup>
+                                        <thead>
+                                            <td></td>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="first_name">First Name:</td>
+                                                <td><input type="text" name="first_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="last_name">Last Name:</label></td>
+                                                <td><input type="text" name="last_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="email_address">Email:</label></td>
+                                                <td><input type="text" name="email_address" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="phone">Phone:</td>
+                                                <td><input type="text" name="phone" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="height">Height:</label></td>
+                                                <td><input type="text" name="height" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="weight">Weight:</label></td>
+                                                <td><input type="text" name="weight" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="birthdate">Birth Date:</label></td>
+                                                <td><input type="text" name="birthdate" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <textarea name="fitness_condition">
+                                    Special conditions/notes
+                                    </textarea>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
+                            </div>
+
+                            <div id="current">
+                                <h2>Current Status</h2>
+                                <p><b>BioPrint Fitness Score (average):</b> 67</p>
+                                <p><b>Weight:</b> 156</p>
+                                <p><b>Workouts/week:</b> 3</p>
+                                <p> ??? </p>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="item-list">
+                    <h2>Workout List</h2>
+                    <table>
+                        <colgroup>
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="60%" />
+                        </colgroup>
+                        <thead>
+                            <td>ID</td>
+                            <td>Date</td>
+                            <td>Facility</td>
+                        </thead>
+                        <tbody>
+                            <tr data-href="12312">
+                                <td>12312</td>
+                                <td>11/24/2015</td>
+                                <td>Evolution</td>
+                            </tr>
+                            <tr data-href="12313">
+                                <td>12313</td>
+                                <td>11/24/2015</td>
+                                <td>Evolution</td>
+                            </tr>
+                            <tr data-href="12314">
+                                <td>12314</td>
+                                <td>11/24/2015</td>
+                                <td>Evolution</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 1</h2>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 2</h2>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-facility-view">
+            <div class="js-page facility-info view">
+                <header>
+                    <div class="avatar">
+                        <img src="/build/images/blank-avatar.png" />
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="tabs">
+                            <ul>
+                                <li><a href="#general">General</a></li>
+                                <li><a href="#manage">Manage</a></li>
+                            </ul>
+
+                            <div id="general">
+                                <h2>Planet Fitness</h2>
+                                <p><b>Address:</b> 123 Fitness Lane, Palo Alto, CA</p>
+                                <p><b>Phone:</b> (408) 567-9876</p>
+                            </div>
+
+                            <div id="manage">
+                                <h2>Facility Info</h2>
+                                <form id="facility-info">
+                                    <table>
+                                        <colgroup>
+                                            <col width="30%" />
+                                            <col width="65%" />
+                                        </colgroup>
+                                        <thead>
+                                            <td></td>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="facility_name">Facility Name:</td>
+                                                <td><input type="text" name="facility_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="email_address">Email:</label></td>
+                                                <td><input type="text" name="email_address" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="phone">Phone:</td>
+                                                <td><input type="text" name="phone" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="address_line_1">Address line 1:</label></td>
+                                                <td><input type="text" name="address_line_1" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="address_line_2">Address line 2:</label></td>
+                                                <td><input type="text" name="address_line_1" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="hours">Hours:</label></td>
+                                                <td><input type="text" name="hours" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="facility-tabs">
+                    <ul>
+                        <li><a href="#trainers-list">Trainers</a></li>
+                        <li><a href="#clients-list">Clients</a></li>
+                    </ul>
+
+                    <div id="trainers-list" class="item-list">
+                        <h2>Trainer List</h2>
+                        <table>
+                            <colgroup>
+                                <col width="50%" />
+                                <col width="50%" />
+                            </colgroup>
+                            <thead>
+                                <td>Name</td>
+                                <td>Number of Clients</td>
+                            </thead>
+                            <tbody>
+                                <tr data-href="12312">
+                                    <td>12312</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr data-href="12313">
+                                    <td>12313</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr data-href="12314">
+                                    <td>12314</td>
+                                    <td>3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="clients-list" class="item-list js-clients-list">
+                        <h2>Client List</h2>
+                        <table>
+                            <colgroup>
+                                <col width="10%" />
+                                <col width="30%" />
+                                <col width="30%" />
+                                <col width="30%" />
+
+                            </colgroup>
+                            <thead>
+                                <td>ID</td>
+                                <td>Client Name</td>
+                                <td>Trainer</td>
+                                <td>Member Since</td>
+                            </thead>
+                            <tbody>
+                                <tr data-href="99">
+                                    <td>12312</td>
+                                    <td>Jen Client</td>
+                                    <td>Joe Trainer</td>
+                                    <td>11/24/2014</td>
+                                </tr>
+                                <tr data-href="99">
+                                    <td>12313</td>
+                                    <td>Jen Client</td>
+                                    <td>Joe Trainer</td>
+                                    <td>11/24/2014</td>
+                                </tr>
+                                <tr data-href="99">
+                                    <td>12314</td>
+                                    <td>Jen Client</td>
+                                    <td>Joe Trainer</td>
+                                    <td>11/24/2014</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 1</h2>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 2</h2>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-trainer-view">
+            <div class="js-page trainer-info view">
+                <header>
+                    <div class="avatar">
+                        <img src="/build/images/blank-avatar.png" />
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="tabs">
+                            <ul>
+                                <li><a href="#general">General</a></li>
+                                <li><a href="#manage">Manage</a></li>
+                            </ul>
+
+                            <div id="general">
+                                <h2>Joe Trainer</h2>
+                                <p><b>Email:</b> joe@trainer.com</p>
+                                <p><b>Phone:</b> (408) 567-9876</p>
+                                <p><b>Facilities:</b> <a href="/facility/99">Evolution</a>, <a href="/facility/99">Planet Fitness</a></p>
+                            </div>
+
+                            <div id="manage">
+                                <h2>Facility Info</h2>
+                                <form id="trainer-info">
+                                    <table>
+                                        <colgroup>
+                                            <col width="30%" />
+                                            <col width="65%" />
+                                        </colgroup>
+                                        <thead>
+                                            <td></td>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="first_name">First Name:</td>
+                                                <td><input type="text" name="first_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="email_address">Email:</label></td>
+                                                <td><input type="text" name="email_address" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="phone">Phone:</td>
+                                                <td><input type="text" name="phone" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="address_line_1">Address line 1:</label></td>
+                                                <td><input type="text" name="address_line_1" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="address_line_2">Address line 2:</label></td>
+                                                <td><input type="text" name="address_line_1" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="facility">Facility:</label></td>
+                                                <td><input type="text" name="facility" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div id="clients-list" class="item-list js-clients-list">
+                    <h2>Client List</h2>
+                    <table>
+                        <colgroup>
+                            <col width="10%" />
+                            <col width="30%" />
+                            <col width="30%" />
+                            <col width="30%" />
+
+                        </colgroup>
+                        <thead>
+                            <td>ID</td>
+                            <td>Client Name</td>
+                            <td>Last Workout</td>
+                            <td>BioPrint Fitness Score</td>
+                        </thead>
+                        <tbody>
+                            <tr data-href="99">
+                                <td>12312</td>
+                                <td>Jen Client</td>
+                                <td>11/24/2014</td>
+                                <td>66</td>
+                            </tr>
+                            <tr data-href="99">
+                                <td>12313</td>
+                                <td>Jen Client</td>
+                                <td>11/24/2014</td>
+                                <td>66</td>
+                            </tr>
+                            <tr data-href="99">
+                                <td>12314</td>
+                                <td>Jen Client</td>
+                                <td>11/24/2014</td>
+                                <td>66</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="charts">
+                    <h2>Chart 1</h2>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 2</h2>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-workout-view">
+            <div class="js-page trainer-info view">
+                <header>
+                    <div class="avatar">
+                        <h2>graph</h2>
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="tabs">
+                            <ul>
+                                <li><a href="#general">Meta Data</a></li>
+                                <li><a href="#manage">Manage</a></li>
+                            </ul>
+
+                            <div id="general">
+                                <h2><a href="/client/99">Jen Client</a></h2>
+                                <p><b>Workout Date:</b> 11/10/2015, 9:00 AM</p>
+                                <p><b>Trainer:</b> Joe Trainer</p>
+                                <p><b>Facility:</b> Evolution</p>
+                                <p><b>Notes:</b> high stress from work</p>
+                            </div>
+
+                            <div id="manage">
+                                <h2>Workout (in progress)</h2>
+                                <form id="workout-info">
+                                    <table>
+                                        <colgroup>
+                                            <col width="30%" />
+                                            <col width="65%" />
+                                        </colgroup>
+                                        <thead>
+                                            <td></td>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="client_name">Client Name:</td>
+                                                <td><input type="text" name="client_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="client_id">id:</label></td>
+                                                <td><input type="text" name="client_id" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="trainer">Trainer:</td>
+                                                <td><input type="text" name="trainer" placeholder="will be drop down" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="facility">Facility:</label></td>
+                                                <td><input type="text" name="facility" placeholder="will be drop down" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="notes">Notes:</label></td>
+                                                <td><textarea name="notes"></textarea></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div id="workout-data" class="workout-data js-workout-data">
+                    <h2>Pre-workout Data</h2>
+                    <ul>
+                        <li><a href="#graphs">Graphs</a></li>
+                        <li><a href="#edit">Edit</a></li>
+                    </ul>
+
+                    <div id="graphs" class="graphs">
+                        <div class="graphs-container">
+                            <div class="graph js-fitness-capacity-score">
+                                <h2>Fitness Capacity Score</h2>
+                                <div class="chart js-chart"></div>
+                            </div>
+                            <div class="graph js-stress-score">
+                                <h2>Stress Score</h2>
+                                <div class="chart js-chart"></div>
+                            </div>
+                            <div class="graph js-fitness-score">
+                                <h2>Fitness Score</h2>
+                                <div class="chart js-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="edit">
+                        <form id="pre-workout-info">
+                            <table>
+                                <colgroup>
+                                    <col width="20%" />
+                                    <col width="30%" />
+                                    <col width="20%" />
+                                    <col width="30%" />
+                                </colgroup>
+                                <thead>
+                                    <td></td>
+                                    <td></td>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><label for="first_name">data point 1:</td>
+                                        <td><input type="text" name="dp_1" /></td>
+                                        <td><label for="email_address">data point 2:</label></td>
+                                        <td><input type="text" name="dp_2" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="phone">data point 3:</td>
+                                        <td><input type="text" name="dp_3" /></td>
+                                        <td><label for="address_line_1">data point 4:</label></td>
+                                        <td><input type="text" name="dp_4" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="address_line_2">data point 5:</label></td>
+                                        <td><input type="text" name="dp_5" /></td>
+                                        <td><label for="facility">data point 6:</label></td>
+                                        <td><input type="text" name="dp_6" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="charts">
+                    <h2>Chart 1</h2>
+                </div>
+
+                <div class="charts">
+                    <h2>Chart 2</h2>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-logout">
+            <h1>Logout</h1>
+        </script>
+
+        <script type="text/html" id="template-settings">
+            <div class="js-page user-settings view">
+                <header>
+                    <div class="avatar">
+                        <img src="/build/images/blank-avatar.png" />
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="tabs">
+                            <ul>
+                                <li><a href="#general">general</a></li>
+                                <li><a href="#edit">edit</a></li>
+                                <li><a href="#consent">consent forms</a></li>
+                            </ul>
+
+                            <div id="general">
+                                <h2>Account owner: Jen User</h2>
+                                <p><b>Email:</b> jenexercise@gmail.com</p>
+                                <p><b>Account Type:</b> Client</p>
+                                <p><b>Account ID:</b> 94857</p>
+                                <p><a href="/user/reset">reset password</a></p>
+                            </div>
+
+                            <div id="edit">
+                                <h2>Account Info</h2>
+                                <form id="account-info">
+                                    <table>
+                                        <colgroup>
+                                            <col width="30%" />
+                                            <col width="65%" />
+                                        </colgroup>
+                                        <thead>
+                                            <td></td>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="first_name">First Name:</td>
+                                                <td><input type="text" name="first_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="last_name">Last Name:</label></td>
+                                                <td><input type="text" name="last_name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="email_address">Email:</label></td>
+                                                <td><input type="text" name="email_address" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="phone">Phone:</td>
+                                                <td><input type="text" name="phone" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="height">Account Type:</label></td>
+                                                <td>
+                                                    <select name="account_type">
+                                                        <option>Client</option>
+                                                        <option>Trainer</option>
+                                                        <option>Facility</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
+                            </div>
+
+                            <div id="consent">
+                                <h2>Terms of Use:</h2>
+                                <p>Here would be the terms</p>
+                                <form id="consent-form">
+                                    <input type="radio" value="i_agree" name="consent" /> I i agree
+                                    <input type="radio" value="disagree" name="consent" />I don't agree
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="consent">
+                    <h2>Payment Info</h2>
+                </div>
+            </div>
+        </script>
+    </body>
+</html>
+
+
+<!-- <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        * {
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        html {
+            color: #888;
+            display: table;
+            font-family: sans-serif;
+            height: 100%;
+            text-align: center;
+            width: 100%;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            margin: 2em auto;
+        }
+
+        h1 {
+            color: #555;
+            font-size: 2em;
+            font-weight: 400;
+        }
+
+        p {
+            margin: 0 auto;
+            width: 280px;
+        }
+
+        @media only screen and (max-width: 280px) {
+
+            body, p {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin: 0 0 0.3em;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Page Not Found</h1>
+    <p>Sorry, but the page you were trying to view does not exist.</p>
+</body>
+</html> -->
+<!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->

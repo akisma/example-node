@@ -1,0 +1,127 @@
+<script type="text/html" id="template-client-view">
+    <div class="js-page client-info">
+    <h1 class="pageTitle">Client Dashboard</h1>
+        <header class="box">
+            <h2 class="boxHeadline">Intake Info</h2>
+            <div class="row">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab-item-1" aria-controls="tab-item-1" role="tab" data-toggle="tab">Info</a></li>
+                        <li role="presentation"><a href="#tab-item-2" aria-controls="tab-item-2" role="tab" data-toggle="tab">Edit</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="tab-item-1">
+                            <h2>{{= first_name }} {{= middle_name }} {{= last_name }}</h2>
+                            <p>{{= gender }}</p>
+                            <p>Height: {{= height }}</p>
+                            <p>Birth Date: {{= birthdate }}</p>
+                            <!-- <p><b>Trainer:</b> <a href="/trainer/99">Joe Trainer</a></p> -->
+                            <!-- <p><b>Facility:</b> <a href="/facility/99">Evolution Fitness Center, Palo Alto, CA</a></p> -->
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab-item-2">
+                            <form id="client-intake-info" class="js-client-intake-info">
+                                <div class="js-errors errors"></div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="first_name">First Name</label>
+                                            <input type="text" class="form-control" name="first_name" placeholder="First name" value="{{= first_name }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="middle_name">Middle Name</label>
+                                            <input type="text" class="form-control" name="middle_name" placeholder="Middle name" value="{{= middle_name }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name</label>
+                                            <input type="text" class="form-control" name="last_name" placeholder="Last name" value="{{= last_name }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <input type="text" class="form-control" name="gender" placeholder="Gender" value="{{= gender }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="height">Height</label>
+                                            <input type="text" class="form-control" name="height" placeholder="Height" value="{{= height }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4">
+                                        <label for="birthdate">Birth Date</label>
+                                        <input class="js-datepicker form-control datepicker" name="birthdate" placeholder="Select date" type="text" value="{{= birthdate }}" />
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary js-submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="item-list box rte box-without-bottom-padding">
+            <h2 class="boxHeadline">Past Workouts</h2>
+            <div class="tableWrap table-responsive">
+                <table class="table table-bordered link-table">
+                    <colgroup>
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="60%" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Facility</th>
+                        </tr>
+                    </thead>
+                    <tbody class="js-link-list">
+                        <tr data-href="12312">
+                            <td>12312</td>
+                            <td>11/24/2015</td>
+                            <td>Evolution</td>
+                        </tr>
+                        <tr data-href="12313">
+                            <td>12313</td>
+                            <td>11/24/2015</td>
+                            <td>Evolution</td>
+                        </tr>
+                        <tr data-href="12314">
+                            <td>12314</td>
+                            <td>11/24/2015</td>
+                            <td>Evolution</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="box rte">
+             <h2 class="boxHeadline">Current Status</h2>
+                <p><b>BioPrint Fitness Score (average):</b> 67</p>
+                <p><b>Weight:</b> 156</p>
+                <p><b>Workouts/week:</b> 3</p>
+                <p> ??? </p>
+            </div>
+
+        <div class="charts box rte">
+            <h2 class="boxHeadline">Charts</h2>
+        </div>
+    </div>
+</script>

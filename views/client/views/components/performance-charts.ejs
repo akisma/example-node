@@ -1,0 +1,22 @@
+<script type="text/html" id="template-performance-post-graphs">
+	<div class="js-performance-post-graphs graphs-container">
+		<div class="graph ct-chart ct-square js-cortisol-graph">
+            <h2>Cortisol Levels</h2>
+            <p><b>Exercise Response:</b> {{= exerciseResponse }}</p>
+            <p><b>Intensity:</b> {{= intensity }}</p>
+            <div class="chart ct-chart ct-square js-chart"></div>
+        </div>
+        <div class="graph js-IgA-graph">
+            <h2>IgA Levels</h2>
+            <p><b>Fitness Capacity:</b> {{= fitnessCapacity }}</p>
+            <p><b>Stress Levels:</b> {{= stressLevels }}</p>
+            <div class="chart ct-chart ct-square js-chart"></div>
+        </div>
+        <div class="graph ct-chart ct-square js-amylase-graph">
+            <h2>Amylase Levels</h2>
+            <p><b>Exercise Response:</b> {{= exerciseResponseAmylase }}</p>
+            <p><b>Recovery:</b> {{= recovery }}</p>
+            <div class="chart ct-chart ct-square js-chart"></div>
+        </div>
+    </div>
+</script>

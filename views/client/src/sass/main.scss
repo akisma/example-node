@@ -1,0 +1,66 @@
+/* import compass modules here if desired */
+
+@import "compass/layout";
+@import "compass/css3";
+@import "compass/utilities";
+
+/* bootstrap and theme */
+@import "vendor/bootstrap";
+@import "vendor/bootstrap-theme";
+
+/* theme plugins */
+
+@import "vendor/app";
+@import "vendor/bootstrap-datepicker";
+@import "vendor/bootstrap-datetimepicker";
+@import "vendor/fontello";
+@import "vendor/select2";
+
+/* jquery UI theme */
+
+@import "jquery-ui/smoothness/jquery-ui";
+@import "jquery-ui/smoothness/theme";
+@import "jquery-ui/jqueryui-editable";
+@import "jquery-ui/jquery-overrides";
+
+/* chartist and other libraries */
+
+@import "vendor/chartist";
+@import "vendor/messenger-spinner";
+@import "vendor/messenger-theme-future";
+@import "vendor/messenger";
+
+/* app styles */
+
+@import "app/client";
+@import "app/profile";
+@import "app/settings";
+@import "app/workouts";
+@import "app/entry";
+
+
+/* TEST SHIT ONLY */
+.index-links li, .test-links li {
+    background-color: cyan;
+    padding: 5px;
+    margin: 5px;
+}
+
+/* THEME OVERRIDES */
+
+.tab-content {
+    font-size: 1.1em;
+}
+
+table.link-table tbody tr:hover {
+    cursor: pointer;
+    background-color: #fff0d9;
+}
+
+.table.table-no-border td {
+    border: 0 !important;
+    padding: 4px 25px !important;
+}
+
+
+
